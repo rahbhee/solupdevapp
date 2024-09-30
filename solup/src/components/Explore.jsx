@@ -11,7 +11,6 @@ const Explore = () => {
 
   return (
     <div>
-     
       Loading...
     </div>
   );

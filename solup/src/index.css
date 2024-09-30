@@ -53,11 +53,9 @@ input[type="file"] {
   text-align: center;
   margin-top: 4px;
 }
-
 .custom-file-upload:hover {
   background-color: #357ABD;
 }
-
 .file-name {
   margin-top: 4px;
   font-size: 0.875rem;
@@ -69,11 +67,9 @@ input[type="file"] {
   position: absolute;
   z-index: 1; 
 }
-
 .fa-paperclip {
   cursor: pointer;
 }
-
 input:focus,
 button:focus,
 textarea:focus,
@@ -83,7 +79,6 @@ select:focus {
 .sidebar-item {
     transition: color 1s ease, filter 0.3s ease;
   }
-  
   .sidebar-item:hover {
     background-color: #f0f5f5;
   }
@@ -96,7 +91,6 @@ select:focus {
   .sidebar-item .active {
     color: black; 
   }
-  
   .sidebar-item .active .icon {
     color: purple; 
   }
@@ -309,12 +303,17 @@ th, td {
 .solupbet h3{
   font-size: .8rem;
 }
-
 .solupbet .green{
   color: rgb(5, 236, 5);
 }
 .solupbet .red{
   color: red;
+}
+.table-line{
+    background-color: 3px solid var(--purple);
+    height: 100%;
+    width:.25rem;
+    border-color: #9933ff;
 }
   @media (max-width: 767px){
    :root{

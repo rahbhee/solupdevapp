@@ -70,7 +70,7 @@ const Sidebar = ({ activeLink, setActiveLink, SIDEBAR_LINKS, connectWallet, conn
                 <li key={link.id} className="sidebar-item text-gray-500 font-medium md:space-x-5 justify-between text-sm rounded-2xl py-2 px-5 hover">
                 <NavLink 
                   to={link.path}
-                  className={({ isActive }) => `flex items-center justify-center md:justify-start ${isActive ? 'bg-gray-100' : ''}`}
+                  className={({ isActive }) => `flex items-center justify-center md:justify-start ${isActive ? 'bg-gray-00' : ''}`}
                   onClick={() => setActiveLink(index)}
                 >
                   <span className={`icon ${activeLink === index ? 'text-purple-600' : 'text-gray-500'}`}>

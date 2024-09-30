@@ -22,6 +22,7 @@ import SolUpAllBets from './pages/SolUpBet/SolUpAllBets';
 import SolUpNewBets from './pages/SolUpBet/SolupNewbets';
 import SolUpTrendingBets from './pages/SolUpBet/SolUpTrendingBets';
 import SolupPlaceBet from './pages/SolUpBet/SolupPlaceBet';
+import Orderbook from './pages/SolUpBet/orderbook';
 
 function App() {
   const [toggle, setToggle] = useState(false);
@@ -75,7 +76,7 @@ function App() {
           <Route path='solupnewbets' element={<SolUpNewBets/>}/>
           <Route path="/placebet/:betId" element={<SolupPlaceBet />} />
           <Route path="chart" element={<SolupPlaceBet />} />
-          <Route path="orderbook" element={<SolupPlaceBet />} />
+          <Route path="orderbook" element={<Orderbook />} />
         </Route>
       </Routes>
 

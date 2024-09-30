@@ -1,7 +1,7 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import solupbetdata from '../solupbetdata.json';
-import { Link, useLocation } from 'react-router-dom';
+import Orderbook from './orderbook';
 import {
   ComposedChart,
   Bar,
@@ -15,10 +15,8 @@ import {
 const SolupPlaceBet = () => {
   const { betId } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
   
   const selectedBet = solupbetdata.find((bet) => bet.id.toString() === betId);
-
 
   const candleData = [
     { name: 'Jan', open: 100, high: 120, low: 80, close: 110 },
@@ -29,11 +27,18 @@ const SolupPlaceBet = () => {
     { name: 'Jun', open: 150, high: 170, low: 140, close: 160 },
   ];
 
+  const [showOrderbook, setShowOrderbook] = useState(false); // Local state to manage displayed content
+
+  const toggleView = (isOrderbook) => {
+    setShowOrderbook(isOrderbook);
+  };
+
+  // Define the yAxisLabels array
   const yAxisLabels = [
-    { value: 50, label: 'Daily' },
-    { value: 100, label: 'Weekly' },
-    { value: 150, label: 'Monthly' },
-    { value: 200, label: 'Yearly' },
+    { value: 50, label: '$50' },
+    { value: 100, label: '$100' },
+    { value: 150, label: '$150' },
+    { value: 200, label: '$200' },
   ];
 
   return (
@@ -78,45 +83,49 @@ const SolupPlaceBet = () => {
                 </tbody>
               </table>
             </div>
-            <div className='project'></div>
           </div>
         </div>
 
         <div className="bg-white rounded-md shadow p-4 py-8 mb-6">
-          <div className='flex ml-10 gap-20 w-full project'>
-            <Link to='/chart'>
-              <h4 className={`${location.pathname.includes('/placebet') ? 'border-b-2 text-500-red mt-4 pro' : ''}`}>
+          <div className='flex ml-10 gap-20 project'>
+            <Link to="#" onClick={() => toggleView(false)}>
+              <h4 className={`${!showOrderbook ? 'border-b-2 text-500-red mt-4 pro' : ''}`}>
                 CHARTS
               </h4>
             </Link>
-            <Link to='/orderbook'>
-              <h4 className={`${location.pathname.includes('/orderbook') ? 'border-b-2 pb-2 mt-4 pro' : ''}`}>
+            <Link to="#" onClick={() => toggleView(true)}>
+              <h4 className={`${showOrderbook ? 'border-b-2 pb-2 mt-4 pro' : ''}`}>
                 ORDERBOOK
               </h4>
             </Link>
           </div>
-          
-          <ResponsiveContainer width="100%" height={300}>
-            <ComposedChart
-              data={candleData}
-              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-              <CartesianGrid stroke="#f5f5f5" />
-              <XAxis dataKey="name" tick={false} axisLine={false} />
-              <YAxis 
-                dataKey="close"
-                type="number"
-                reversed={true}
-                ticks={[50, 100, 150, 200]}
-                tickFormatter={(tick) => {
-                  const label = yAxisLabels.find((label) => label.value === tick);
-                  return label ? label.label : tick;
-                }}
-              />
-              <Tooltip />
-              <Bar dataKey="high" fill="red" barSize={10} />
-              <Bar dataKey="low" fill="blue" barSize={10} />
-            </ComposedChart>
-          </ResponsiveContainer>
+
+          {/* Conditional rendering based on local state */}
+          {showOrderbook ? (
+            <Orderbook />
+          ) : (
+            <ResponsiveContainer width="100%" height={300}>
+              <ComposedChart
+                data={candleData}
+                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <CartesianGrid stroke="#f5f5f5" />
+                <XAxis dataKey="name" tick={false} axisLine={false} />
+                <YAxis
+                  dataKey="close"
+                  type="number"
+                  reversed={true}
+                  ticks={[50, 100, 150, 200]}
+                  tickFormatter={(tick) => {
+                    const label = yAxisLabels.find((label) => label.value === tick);
+                    return label ? label.label : tick;
+                  }}
+                />
+                <Tooltip />
+                <Bar dataKey="high" fill="red" barSize={10} />
+                <Bar dataKey="low" fill="blue" barSize={10} />
+              </ComposedChart>
+            </ResponsiveContainer>
+          )}
         </div>
       </div>
 
